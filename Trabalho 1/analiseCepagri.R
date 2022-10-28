@@ -1,5 +1,5 @@
 #set workdir
-setwd("C:/Users/franc/OneDrive/Documentos/MDC - Unicamp/Trabalho 1")
+setwd("D:/Training/Unicamp/MDC/Modulo 1/Trabalho 1/MDC/Trabalho 1")
 
 #install.packages("rlang")
 #install.packages("ggplot2")
@@ -89,14 +89,16 @@ any(consecutivo(cepagri$temp, 720)) #5 dias
 any(consecutivo(cepagri$temp, 1440)) #10 dias
 any(consecutivo(cepagri$temp, 1584)) #11 dias
 
+
+#selecionando a cada 24 horas
 filtro_consecutivo_temp <- consecutivo(cepagri$temp, 144)
 
 length(unique(as.Date(cepagri[filtro_consecutivo_temp , 1])))
 
-summary(cepagri)
+head(cepagri[filtro_consecutivo_temp, ], 10)
+tail(cepagri[filtro_consecutivo_temp, ], 10)
 
 #########################################################
-
 
 
 
@@ -111,12 +113,16 @@ any(consecutivo(cepagri$vento, 5760)) #40 dias
 any(consecutivo(cepagri$vento, 7056)) #49 dias # FALSE
 
 
-#Selecionando a cada 2 horas. 
-filtro_consecutivo_vento <- consecutivo(cepagri$vento, 72)
+#Selecionando a cada 24 horas
+filtro_consecutivo_vento <- consecutivo(cepagri$vento, 144)
 
 length(unique(as.Date(cepagri[filtro_consecutivo_vento , 1])))
 
-summary(cepagri)
+
+summary(cepagri[filtro_consecutivo_vento, ])
+head(cepagri[filtro_consecutivo_vento, ], 10)
+tail(cepagri[filtro_consecutivo_vento, ], 10)
+
 
 
 ######################umid##################################
@@ -126,12 +132,15 @@ any(consecutivo(cepagri$umid, 1440)) #10 dias
 any(consecutivo(cepagri$umid, 1584)) #11 dias
 
 
-#Selecionando a cada 8 horas. 
-filtro_consecutivo_umid <- consecutivo(cepagri$umid, 72)
+#Selecionando a cada 24 horas
+filtro_consecutivo_umid <- consecutivo(cepagri$umid, 144)
 
 length(unique(as.Date(cepagri[filtro_consecutivo_umid , 1])))
 
 summary(cepagri)
+
+head(cepagri[filtro_consecutivo_umid, ], 10)
+tail(cepagri[filtro_consecutivo_umid, ], 10)
 
 
 
@@ -142,12 +151,33 @@ any(consecutivo(cepagri$sensacao, 720)) #5 dias
 any(consecutivo(cepagri$sensacao, 1440)) #10 dias
 any(consecutivo(cepagri$sensacao, 1584)) #11 dias
 
-#Selecionando a cada 3 horas. 
-filtro_consecutivo_sensa <- consecutivo(cepagri$sensacao, 72)
+#Selecionando a cada 24 horas. 
+filtro_consecutivo_sensa <- consecutivo(cepagri$sensacao, 144)
 
 length(unique(as.Date(cepagri[filtro_consecutivo_sensa , 1])))
 
 summary(cepagri)
+
+##############################################################
+
+####################horario###################################
+
+
+cepagri$datanumeric <- as.numeric(cepagri$horario)
+
+summary(cepagri)
+
+
+any(consecutivo(cepagri$datanumeric, 2)) 
+any(consecutivo(cepagri$datanumeric, 10)) 
+any(consecutivo(cepagri$datanumeric, 52)) 
+
+
+filtro_consecutivo_horario <- consecutivo(cepagri$datanumeric, 2)
+
+length(unique(as.Date(cepagri[filtro_consecutivo_horario , 1])))
+unique(as.Date(cepagri[filtro_consecutivo_horario , 1]))
+
 
 
 ####################################
@@ -187,4 +217,5 @@ summary(cepagri)
 
 
 #####################################################
+
 
