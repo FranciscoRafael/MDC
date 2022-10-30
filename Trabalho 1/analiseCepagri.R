@@ -1,5 +1,5 @@
 #set workdir
-setwd("D:/Training/Unicamp/MDC/Modulo 1/Trabalho 1/MDC/Trabalho 1")
+setwd("C:/Users/Vanessa Carneiro/Documents/MDC/Trabalho 1/")
 
 #install.packages("rlang")
 #install.packages("ggplot2")
@@ -84,10 +84,10 @@ tail(cepagri)
 
 
 #2 dias: 
-any(consecutivo(cepagri$temp, 288)) #2 dias
-any(consecutivo(cepagri$temp, 720)) #5 dias
-any(consecutivo(cepagri$temp, 1440)) #10 dias
-any(consecutivo(cepagri$temp, 1584)) #11 dias
+#any(consecutivo(cepagri$temp, 288)) #2 dias
+#any(consecutivo(cepagri$temp, 720)) #5 dias
+#any(consecutivo(cepagri$temp, 1440)) #10 dias
+#any(consecutivo(cepagri$temp, 1584)) #11 dias
 
 
 #selecionando a cada 24 horas
@@ -103,14 +103,14 @@ tail(cepagri[filtro_consecutivo_temp, ], 10)
 
 
 ############### Vento ##################################
-any(consecutivo(cepagri$vento, 144)) #2 dias
-any(consecutivo(cepagri$vento, 720)) #5 dias
-any(consecutivo(cepagri$vento, 1440)) #10 dias
-any(consecutivo(cepagri$vento, 1584)) #11 dias
-any(consecutivo(cepagri$vento, 2880)) #20 dias
-any(consecutivo(cepagri$vento, 4320)) #30 dias
-any(consecutivo(cepagri$vento, 5760)) #40 dias
-any(consecutivo(cepagri$vento, 7056)) #49 dias # FALSE
+#any(consecutivo(cepagri$vento, 144)) #2 dias
+#any(consecutivo(cepagri$vento, 720)) #5 dias
+#any(consecutivo(cepagri$vento, 1440)) #10 dias
+#any(consecutivo(cepagri$vento, 1584)) #11 dias
+#any(consecutivo(cepagri$vento, 2880)) #20 dias
+#any(consecutivo(cepagri$vento, 4320)) #30 dias
+#any(consecutivo(cepagri$vento, 5760)) #40 dias
+#any(consecutivo(cepagri$vento, 7056)) #49 dias # FALSE
 
 
 #Selecionando a cada 24 horas
@@ -126,10 +126,10 @@ tail(cepagri[filtro_consecutivo_vento, ], 10)
 
 
 ######################umid##################################
-any(consecutivo(cepagri$umid, 144)) #2 dias
-any(consecutivo(cepagri$umid, 720)) #5 dias
-any(consecutivo(cepagri$umid, 1440)) #10 dias
-any(consecutivo(cepagri$umid, 1584)) #11 dias
+#any(consecutivo(cepagri$umid, 144)) #2 dias
+#any(consecutivo(cepagri$umid, 720)) #5 dias
+#any(consecutivo(cepagri$umid, 1440)) #10 dias
+#any(consecutivo(cepagri$umid, 1584)) #11 dias
 
 
 #Selecionando a cada 24 horas
@@ -146,10 +146,10 @@ tail(cepagri[filtro_consecutivo_umid, ], 10)
 
 ######################sensacao###############################
 
-any(consecutivo(cepagri$sensacao, 144)) #2 dias
-any(consecutivo(cepagri$sensacao, 720)) #5 dias
-any(consecutivo(cepagri$sensacao, 1440)) #10 dias
-any(consecutivo(cepagri$sensacao, 1584)) #11 dias
+#any(consecutivo(cepagri$sensacao, 144)) #2 dias
+#any(consecutivo(cepagri$sensacao, 720)) #5 dias
+#any(consecutivo(cepagri$sensacao, 1440)) #10 dias
+#any(consecutivo(cepagri$sensacao, 1584)) #11 dias
 
 #Selecionando a cada 24 horas. 
 filtro_consecutivo_sensa <- consecutivo(cepagri$sensacao, 144)
@@ -168,9 +168,9 @@ cepagri$datanumeric <- as.numeric(cepagri$horario)
 summary(cepagri)
 
 
-any(consecutivo(cepagri$datanumeric, 2)) 
-any(consecutivo(cepagri$datanumeric, 10)) 
-any(consecutivo(cepagri$datanumeric, 52)) 
+#any(consecutivo(cepagri$datanumeric, 2)) 
+#any(consecutivo(cepagri$datanumeric, 10)) 
+#any(consecutivo(cepagri$datanumeric, 52)) 
 
 
 filtro_consecutivo_horario <- consecutivo(cepagri$datanumeric, 2)
@@ -185,9 +185,9 @@ unique(as.Date(cepagri[filtro_consecutivo_horario , 1]))
 # sensacao termica
 
 summary(cepagri$sensacao)
-length(cepagri[cepagri$sensa < 0, 5])
+length(cepagri[cepagri$sensacao < 0, 5])
 
-head(cepagri[cepagri$sensa == 99.9, ], 10)
+head(cepagri[cepagri$sensacao == 99.9, ], 10)
 
 cepagri[cepagri$sensa == 99.9, 5] <- NA
 
@@ -218,4 +218,184 @@ summary(cepagri)
 
 #####################################################
 
+
+cepagri$datanumeric <- NULL
+summary(cepagri)
+
+#verificando as datas dos valores consecutivos para cada variavel
+length(unique(as.Date(cepagri[filtro_consecutivo_temp , 1])))
+length(unique(as.Date(cepagri[filtro_consecutivo_vento , 1])))
+length(unique(as.Date(cepagri[filtro_consecutivo_umid , 1])))
+length(unique(as.Date(cepagri[filtro_consecutivo_sensa , 1])))
+length(unique(as.Date(cepagri[filtro_consecutivo_horario , 1])))
+
+
+summary(unique(as.Date(cepagri[filtro_consecutivo_temp , 1])))
+summary(unique(as.Date(cepagri[filtro_consecutivo_vento , 1])))
+summary(unique(as.Date(cepagri[filtro_consecutivo_umid , 1])))
+summary(unique(as.Date(cepagri[filtro_consecutivo_sensa , 1])))
+summary(unique(as.Date(cepagri[filtro_consecutivo_horario , 1])))
+
+
+##############################################################
+## analise por ano consecutivo sem filtrar
+
+
+### 2015
+cepagri2015 <- cepagri[cepagri$ano == 2015, ]
+### 2015 temp
+tapply(cepagri2015$temp, cepagri2015$mes, function(x){mean(consecutivo(x, 30))})
+### 2015 temp
+tapply(cepagri2015$vento, cepagri2015$mes, function(x){mean(consecutivo(x, 30))})
+### 2015 umid
+tapply(cepagri2015$umid, cepagri2015$mes, function(x){mean(consecutivo(x, 30))})
+### 2015 sensacao
+tapply(cepagri2015$sensacao, cepagri2015$mes, function(x){mean(consecutivo(x, 30))})
+
+
+
+
+### 2016
+cepagri2016 <- cepagri[cepagri$ano == 2016, ]
+### 2015 temp
+tapply(cepagri2016$temp, cepagri2016$mes, function(x){mean(consecutivo(x, 30))})
+### 2015 temp
+tapply(cepagri2016$vento, cepagri2016$mes, function(x){mean(consecutivo(x, 30))})
+### 2015 umid
+tapply(cepagri2016$umid, cepagri2016$mes, function(x){mean(consecutivo(x, 30))})
+### 2015 sensacao
+tapply(cepagri2016$sensacao, cepagri2016$mes, function(x){mean(consecutivo(x, 30))})
+
+
+
+### 2017
+cepagri2017 <- cepagri[cepagri$ano == 2017, ]
+### 2017 temp
+tapply(cepagri2017$temp, cepagri2017$mes, function(x){mean(consecutivo(x, 30))})
+### 2017 temp
+tapply(cepagri2017$vento, cepagri2017$mes, function(x){mean(consecutivo(x, 30))})
+### 2017 umid
+tapply(cepagri2017$umid, cepagri2017$mes, function(x){mean(consecutivo(x, 30))})
+### 2017 sensacao
+tapply(cepagri2017$sensacao, cepagri2017$mes, function(x){mean(consecutivo(x, 30))})
+
+
+
+
+
+### 2018
+cepagri2018 <- cepagri[cepagri$ano == 2018, ]
+### 2018 temp
+tapply(cepagri2018$temp, cepagri2018$mes, function(x){mean(consecutivo(x, 30))})
+### 2018 temp
+tapply(cepagri2018$vento, cepagri2018$mes, function(x){mean(consecutivo(x, 30))})
+### 2018 umid
+tapply(cepagri2018$umid, cepagri2018$mes, function(x){mean(consecutivo(x, 30))})
+### 2018 sensacao
+tapply(cepagri2018$sensacao, cepagri2018$mes, function(x){mean(consecutivo(x, 30))})
+
+
+### 2019
+cepagri2019 <- cepagri[cepagri$ano == 2019, ]
+### 2019 temp
+tapply(cepagri2019$temp, cepagri2019$mes, function(x){mean(consecutivo(x, 30))})
+### 2019 temp
+tapply(cepagri2019$vento, cepagri2019$mes, function(x){mean(consecutivo(x, 30))})
+### 2019 umid
+tapply(cepagri2019$umid, cepagri2019$mes, function(x){mean(consecutivo(x, 30))})
+### 2019 sensacao
+tapply(cepagri2019$sensacao, cepagri2019$mes, function(x){mean(consecutivo(x, 30))})
+
+
+### 2020
+cepagri2020 <- cepagri[cepagri$ano == 2020, ]
+### 2020 temp
+tapply(cepagri2020$temp, cepagri2020$mes, function(x){mean(consecutivo(x, 30))})
+### 2020 temp
+tapply(cepagri2020$vento, cepagri2020$mes, function(x){mean(consecutivo(x, 30))})
+### 2020 umid
+tapply(cepagri2020$umid, cepagri2020$mes, function(x){mean(consecutivo(x, 30))})
+### 2020 sensacao
+tapply(cepagri2020$sensacao, cepagri2020$mes, function(x){mean(consecutivo(x, 30))})
+
+
+### 2021
+cepagri2021 <- cepagri[cepagri$ano == 2021, ]
+### 2021 temp
+tapply(cepagri2021$temp, cepagri2021$mes, function(x){mean(consecutivo(x, 30))})
+### 2021 temp
+tapply(cepagri2021$vento, cepagri2021$mes, function(x){mean(consecutivo(x, 30))})
+### 2021 umid
+tapply(cepagri2021$umid, cepagri2021$mes, function(x){mean(consecutivo(x, 30))})
+### 2021 sensacao
+tapply(cepagri2021$sensacao, cepagri2021$mes, function(x){mean(consecutivo(x, 30))})
+
+
+
+#removendo todos os dados repetidos.
+
+summary(cepagri)
+cepagri[filtro_consecutivo_temp, 2] <- NA
+cepagri[filtro_consecutivo_vento, 3] <- NA
+cepagri[filtro_consecutivo_umid, 4] <- NA
+cepagri[filtro_consecutivo_sensa, 5] <- NA
+cepagri[filtro_consecutivo_horario, 1] <- NA
+
+summary(cepagri$temp)
+summary(cepagri$vento)
+summary(cepagri$umid)
+summary(cepagri$sensacao)
+summary(cepagri$horario)
+
+
+#removendo os NAs para fins de analise. 
+
+nrow(cepagri)
+cepagri_wtNA <- cepagri[!is.na(cepagri$horario), ]
+cepagri_wtNA <- cepagri[!is.na(cepagri$vento), ]
+cepagri_wtNA <- cepagri[!is.na(cepagri$umid), ]
+cepagri_wtNA <- cepagri[!is.na(cepagri$sensacao), ]
+cepagri_wtNA <- cepagri[!is.na(cepagri$temp), ]
+nrow(cepagri_wtNA)
+
+summary(cepagri_wtNA)
+
+##df para cada ano
+cepagri2015 <- cepagri_wtNA[cepagri_wtNA$ano == 2015, ]
+cepagri2016 <- cepagri_wtNA[cepagri_wtNA$ano == 2016, ]
+cepagri2017 <- cepagri_wtNA[cepagri_wtNA$ano == 2017, ]
+cepagri2018 <- cepagri_wtNA[cepagri_wtNA$ano == 2018, ]
+cepagri2019 <- cepagri_wtNA[cepagri_wtNA$ano == 2019, ]
+cepagri2020 <- cepagri_wtNA[cepagri_wtNA$ano == 2020, ]
+cepagri2021 <- cepagri_wtNA[cepagri_wtNA$ano == 2021, ]
+
+
+summary(cepagri2015)
+summary(cepagri2016)
+summary(cepagri2017)
+summary(cepagri2018)
+summary(cepagri2019)
+summary(cepagri2020)
+summary(cepagri2021)
+
+
+
+library(ggplot2)
+cepagri2015$mes <- as.factor(cepagri2015$mes)
+cepagri2016$mes <- as.factor(cepagri2016$mes)
+cepagri2017$mes <- as.factor(cepagri2017$mes)
+cepagri2018$mes <- as.factor(cepagri2018$mes)
+cepagri2019$mes <- as.factor(cepagri2019$mes)
+cepagri2020$mes <- as.factor(cepagri2020$mes)
+cepagri2021$mes <- as.factor(cepagri2021$mes)
+
+
+
+ggplot(cepagri2015, aes(x = mes, y = temp, group = mes)) + geom_point(alpha = 0.01)
+ggplot(cepagri2016, aes(x = mes, y = temp, group = mes)) + geom_point(alpha = 0.01)
+ggplot(cepagri2017, aes(x = mes, y = temp, group = mes)) + geom_point(alpha = 0.01)
+ggplot(cepagri2018, aes(x = mes, y = temp, group = mes)) + geom_point(alpha = 0.01)
+ggplot(cepagri2019, aes(x = mes, y = temp, group = mes)) + geom_point(alpha = 0.01)
+ggplot(cepagri2020, aes(x = mes, y = temp, group = mes)) + geom_point(alpha = 0.01)
+ggplot(cepagri2021, aes(x = mes, y = temp, group = mes)) + geom_point(alpha = 0.01)
 
